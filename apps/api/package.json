@@ -1,0 +1,33 @@
+{
+  "name": "@raf/api",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "nest build",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main.js",
+    "test": "vitest run",
+    "test:type": "tsc -p tsconfig.spec.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@nestjs/common": "latest",
+    "@nestjs/core": "latest",
+    "@nestjs/platform-express": "latest",
+    "class-transformer": "latest",
+    "class-validator": "latest",
+    "dotenv": "latest",
+    "openai": "latest",
+    "pg": "latest",
+    "reflect-metadata": "latest",
+    "rxjs": "latest"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "latest",
+    "@types/node": "latest",
+    "@types/pg": "latest",
+    "typescript": "^6.0.0",
+    "vitest": "latest"
+  }
+}

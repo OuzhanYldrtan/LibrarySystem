@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raf — Kütüphane Operasyon Merkezi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Ana sayfa"><span>r</span><strong>raf.</strong></a>
+        <nav aria-label="Sayfa bölümleri"><a href="#rental">Ödünç işlemi</a><a href="#catalog">Katalog</a><a href="#assistant">Asistan</a></nav>
+        <div class="status"><i></i> PostgreSQL bağlı</div>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">KÜTÜPHANE OPERASYON MERKEZİ</p>
+          <h1>Her kitap için<br /><span>net bir kayıt.</span></h1>
+          <p>Ödünç işlemlerini yönetin, canlı katalogda arayın ve asistanla kütüphane kayıtlarını sorgulayın.</p>
+        </div>
+        <div class="database-note"><span class="db-mark">⌘</span><div><strong>PostgreSQL</strong><small>Canlı veritabanı bağlantısı</small></div></div>
+      </section>
+
+      <section class="overview" aria-label="Kütüphane özeti">
+        <article class="stat-card violet"><span>Toplam kitap</span><strong id="bookCount">—</strong><small>Katalogda kayıtlı</small></article>
+        <article class="stat-card lime"><span>Aktif üye</span><strong id="memberCount">—</strong><small>Veritabanında kayıtlı</small></article>
+        <article class="stat-card peach"><span>Ödünçte</span><strong id="loanCount">—</strong><small>Aktif işlem</small></article>
+        <article class="stat-card dark"><span>Raflarda</span><strong id="availableCount">—</strong><small>Alınmaya hazır</small></article>
+      </section>
+
+      <section id="rental" class="operations">
+        <form id="rentalForm" class="rental-card">
+          <div class="section-heading">
+            <div><p class="eyebrow">HIZLI İŞLEM</p><h2>Kitap ödünç ver</h2></div>
+            <span class="step">01</span>
+          </div>
+          <p class="rental-intro">Müsait kitabı ve üyeyi seçin. İşlem anında PostgreSQL veritabanına kaydedilir.</p>
+          <div class="form-fields">
+            <label>Kitap<select id="rentalBook" required><option value="">Kitap seçin</option></select></label>
+            <label>Üye<select id="rentalMember" required><option value="">Üye seçin</option></select></label>
+            <label>Teslim tarihi<input id="rentalDueAt" type="date" required /></label>
+          </div>
+          <div class="rental-footer"><p id="rentalFeedback" aria-live="polite"></p><button type="submit">Ödünç ver <span>→</span></button></div>
+        </form>
+
+        <section class="active-loans panel" aria-labelledby="active-loans-title">
+          <div class="section-heading"><div><p class="eyebrow">AÇIK İŞLEMLER</p><h2 id="active-loans-title">Ödünçteki kitaplar</h2></div><span class="step">02</span></div>
+          <div id="loanList" class="loan-list" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <section class="workspace">
+        <aside id="catalog" class="catalog panel">
+          <div class="section-heading catalog-heading">
+            <div><p class="eyebrow">CANLI KATALOG</p><h2>Kitaplar</h2></div>
+            <label class="search"><span>⌕</span><input id="bookFilter" type="search" placeholder="Ara" aria-label="Kitap ara" /></label>
+          </div>
+          <div id="bookList" class="book-list" aria-live="polite"></div>
+          <footer class="catalog-footer"><span class="legend available"></span>Müsait <span class="legend loaned"></span>Ödünçte</footer>
+        </aside>
+
+        <section id="assistant" class="assistant panel">
+          <div class="assistant-header">
+            <div class="assistant-mark">✦</div>
+            <div><p class="eyebrow">RAF ASİSTANI</p><h2>Kayıtlarınızla konuşun.</h2></div>
+          </div>
+          <div id="messages" class="messages" aria-live="polite">
+            <article class="message bot">Merhaba! Bir kitabın nerede olduğunu, kimde olduğunu veya bir üyenin aldığı kitapları sorabilirsiniz.</article>
+          </div>
+          <div class="prompts" aria-label="Örnek sorular">
+            <button type="button">Dune hangi rafta?</button>
+            <button type="button">Kürk Mantolu Madonna kimde?</button>
+            <button type="button">Ayşe Demir hangi kitapları aldı?</button>
+          </div>
+          <form id="chatForm" class="composer">
+            <label class="sr-only" for="chatInput">Kütüphane asistanına soru sor</label>
+            <input id="chatInput" autocomplete="off" placeholder="Örn. Simyacı müsait mi?" maxlength="300" required />
+            <button type="submit" aria-label="Gönder"><span>Gönder</span> ↗</button>
+          </form>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

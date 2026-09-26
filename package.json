@@ -1,0 +1,16 @@
+{
+  "name": "raf-library-platform",
+  "private": true,
+  "version": "2.0.0",
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev": "pnpm --filter @raf/mcp build && concurrently -k -n MCP,API,WEB -c magenta,cyan,green \"pnpm --filter @raf/mcp build:watch\" \"pnpm --filter @raf/api start:dev\" \"pnpm --filter @raf/web dev\"",
+    "build": "pnpm --filter @raf/mcp build && pnpm --filter @raf/api build && pnpm --filter @raf/web build",
+    "test": "pnpm --filter @raf/api test",
+    "typecheck": "pnpm --filter @raf/mcp build && pnpm --filter @raf/api test:type && pnpm --filter @raf/web build",
+    "start": "pnpm --filter @raf/api start:prod"
+  },
+  "devDependencies": {
+    "concurrently": "latest"
+  }
+}
